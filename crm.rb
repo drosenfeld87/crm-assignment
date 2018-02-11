@@ -67,17 +67,20 @@ class CRM
   end
 
   def delete_contact
-
+    puts "who do you want to delete"
+    name = gets.chomp.to_s
+    contact = Contact.search_by('first_name', name)
+    puts "Do you really want to delete #{contact.first_name}? (y/n)"
+    answer = gets.chomp.to_s
+    if answer == 'y'
+      Contact.delete(contact)
+    end
   end
 
   def display_all_contacts
     Contact.all.each do |contact|
       puts contact.first_name
     end
-  end
-
-  def search_by_attribute(name_of_attribute)
-    self.find_by = name_of_attribute
   end
 
 end

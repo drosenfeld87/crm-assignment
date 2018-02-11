@@ -94,16 +94,15 @@ class Contact
       @note = value_of_attribute
     end
   end
-end
 
   # This method should work similarly to the find method above
   # but it should allow you to search for a contact using attributes other than id
   # by specifying both the name of the attribute and the value
   # eg. searching for 'first_name', 'Betty' should return the first contact named Betty
-  def self.find_by(name_of_attribute, value_of_attribute)
+  def self.search_by(name_of_attribute, value_of_attribute)
     if name_of_attribute == 'first_name'
       @@contacts.find do |contact|
-        contact.name_of_attribute == value_of_attribute
+        contact.first_name == value_of_attribute
       end
     elsif name_of_attribute == 'last_name'
       @@contacts.find do |contact|
@@ -122,7 +121,7 @@ end
 
   # This method should delete all of the contacts
   def self.delete_all
-    @@contacts []
+    @@contacts = []
   end
 
   def full_name
@@ -131,11 +130,11 @@ end
 
   # This method should delete the contact
   # HINT: Check the Array class docs for built-in methods that might be useful here
-  def delete
-    @@contact.delete()
+  def self.delete(contact)
+    @@contacts.delete(contact)
   end
     # Feel free to add other methods here, if you need them.
-
+end
 
 new_contact1 = Contact.create('Deb', 'Rosenfeld', 'drosenfeld87@gmail.com', 'likes_cats',)
 new_contact2 = Contact.create('Devin', 'McCoy', 'devingmccoy@gmail.com', 'likes_gaming')
