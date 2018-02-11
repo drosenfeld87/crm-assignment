@@ -83,7 +83,7 @@ class Contact
   # 1. which of the contact's attributes you want to update
   # 2. the new value for that attribute
   # and then make the appropriate change to the contact
-  def update(name_of_attribute, value_of_attribute)
+  def modify_existing_contact(name_of_attribute, value_of_attribute)
     if name_of_attribute == 'first_name'
       @first_name = value_of_attribute
     elsif name_of_attribute == 'last_name'
@@ -99,7 +99,7 @@ class Contact
   # but it should allow you to search for a contact using attributes other than id
   # by specifying both the name of the attribute and the value
   # eg. searching for 'first_name', 'Betty' should return the first contact named Betty
-  def self.search_by(name_of_attribute, value_of_attribute)
+  def self.search_by_attribute(name_of_attribute, value_of_attribute)
     if name_of_attribute == 'first_name'
       @@contacts.find do |contact|
         contact.first_name == value_of_attribute

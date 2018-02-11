@@ -35,6 +35,14 @@ class CRM
     end
   end
 
+  def search_by_attribute
+    puts "enter attribute to search by"
+    attribute = gets.chomp.to_s
+    puts "which #{attribute} would you like"
+    value = gets.chomp.to_s
+    puts Contact.search_by_attribute(attribute, value)
+  end
+
   def add_new_contact
     print 'Enter First Name: '
   first_name = gets.chomp
@@ -74,6 +82,8 @@ class CRM
     answer = gets.chomp.to_s
     if answer == 'y'
       Contact.delete(contact)
+    else
+      puts "good"
     end
   end
 
