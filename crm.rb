@@ -36,11 +36,9 @@ class CRM
   end
 
   def search_by_attribute
-    puts "enter attribute to search by"
-    attribute = gets.chomp.to_s
-    puts "which #{attribute} would you like"
+    puts "which attribute would you like"
     value = gets.chomp.to_s
-    puts Contact.search_by_attribute(attribute, value)
+    return Contact.search_by_attribute(value)
   end
 
   def add_new_contact
@@ -59,19 +57,28 @@ class CRM
   Contact.create(first_name, last_name, email, note)
   end
 
-  def modify_existing_contact(first_name, last_name, email, note)
-    print 'Edit First Name: '
-  first_name = gets.chomp
-
-  print 'Edit Last Name: '
-  last_name = gets.chomp
-
-  print 'Edit Email Address: '
-  email = gets.chomp
-
-  print 'Edit a Note: '
-  note = gets.chomp
-
+  def modify_existing_contact
+    #find contact to modify
+    contact = search_by_attribute
+    puts contact
+    #ask for attribute to modify and new value
+    puts 'what do you want to change'
+    attribute_to_change = gets.chomp
+    puts 'what do you want to change it to?'
+    new_value = gets.chomp
+    #update attribute on contact
+    Contact.update(contact, attribute_to_change, new_value)
+    # print 'Edit First Name: '
+    # first_name = gets.chomp
+    #
+    # print 'Edit Last Name: '
+    # last_name = gets.chomp
+    #
+    # print 'Edit Email Address: '
+    # email = gets.chomp
+    #
+    # print 'Edit a Note: '
+    # note = gets.chomp
   end
 
   def delete_contact
@@ -89,7 +96,7 @@ class CRM
 
   def display_all_contacts
     Contact.all.each do |contact|
-      puts contact.first_name
+      puts "#{contact.first_name}, #{contact.last_name}, #{contact.email}, #{contact.note}"
     end
   end
 

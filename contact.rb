@@ -1,4 +1,5 @@
 class Contact
+  attr_accessor :first_name, :last_name, :email, :note, :id
   @@contacts = []
   @@id = 1
 
@@ -10,48 +11,6 @@ class Contact
     @note = note
     @id = @@id
     @@id += 1
-  end
-
-  #setters (writers)
-  def first_name(first_name)
-    @first_name = first_name
-  end
-
-  def last_name(last_name)
-    @last_name = last_name
-  end
-
-  def email(email)
-    @email = email
-  end
-
-  def note(note)
-    @note = note
-  end
-
-  def id
-    @id
-  end
-
-  #getters (readers)
-  def add_new_contact
-    @add_new_contact
-  end
-
-  def first_name
-    @first_name
-  end
-
-  def last_name
-    @last_name
-  end
-
-  def email
-    @email
-  end
-
-  def note
-    @note
   end
 
   # This method should call the initializer,
@@ -99,30 +58,53 @@ class Contact
   # but it should allow you to search for a contact using attributes other than id
   # by specifying both the name of the attribute and the value
   # eg. searching for 'first_name', 'Betty' should return the first contact named Betty
-  def self.search_by_attribute(name_of_attribute, value_of_attribute)
-    if name_of_attribute == 'first_name'
-      @@contacts.find do |contact|
-        contact.first_name == value_of_attribute
-      end
-    elsif name_of_attribute == 'last_name'
-      @@contacts.find do |contact|
-        contact.last_name == value_of_attribute
-      end
-    elsif name_of_attribute == 'email'
-      @@contacts.find do |contact|
-        contact.email == value_of_attribute
-      end
-    else
-      @@contacts.find do |contact|
-        contact.note == value_of_attribute
+
+  def self.search_by_attribute(value)
+    @@contacts.find do |contact|
+      if contact.first_name == value || contact.email == value || contact.last_name == value || contact.note == value
+        puts contact.first_name
+        return contact
+      else
+        return 'contact not found'
       end
     end
   end
+  # def self.search_by_attribute(value)
+  #   if name_of_attribute == 'first_name'
+  #     @@contacts.find do |contact|
+  #       contact.first_name == value_of_attribute
+  #     end
+  #   elsif name_of_attribute == 'last_name'
+  #     @@contacts.find do |contact|
+  #       contact.last_name == value_of_attribute
+  #     end
+  #   elsif name_of_attribute == 'email'
+  #     @@contacts.find do |contact|
+  #       contact.email == value_of_attribute
+  #     end
+  #   else
+  #     @@contacts.find do |contact|
+  #       contact.note == value_of_attribute
+  #     end
+  #   end
+  # end
 
   # This method should delete all of the contacts
   def self.delete_all
     @@contacts = []
   end
+
+  def self.update(contact, attribute, new_value)
+    case attribute
+    when 'first_name'
+      contact.first_name = new_value
+    when 'last_name'
+      contact.last_name = new_value
+    when 'email'
+      contact.email = new_value
+    end
+  end
+
 
   def full_name
     "#{@first_name}, #{@last_name}"
