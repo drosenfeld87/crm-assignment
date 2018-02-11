@@ -143,4 +143,4 @@ new_contact3 = Contact.create('Meg', 'Pesant', 'megan@meganpesant.com', 'likes_p
 
 # n= Contact.full_name(first_name, last_name)
 # pp n
-p new_contact2.update('first_name','Dev')
+# p new_contact2.update('first_name','Dev')

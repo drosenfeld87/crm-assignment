@@ -1,10 +1,9 @@
 require './contact.rb'
 
 class CRM
-
-  def initialize(name)
-    puts "Okay, this CRM has the name "
-
+  def self.run
+    crm = CRM.new
+    crm.main_menu
   end
 
   def main_menu
@@ -22,8 +21,7 @@ class CRM
     puts '[4] Display all the contacts'
     puts '[5] Search by attribute'
     puts '[6] Exit'
-    print 'Enter a #{number}'
-    number=gets.to_i
+    puts 'Enter a number:'
   end
 
   def call_option(user_selected)
@@ -73,16 +71,20 @@ class CRM
   end
 
   def display_all_contacts
-
+    Contact.all.each do |contact|
+      puts contact.first_name
+    end
   end
 
-  def search_by_attribute
-
+  def search_by_attribute(name_of_attribute)
+    self.find_by = name_of_attribute
   end
 
 end
 
-a_crm_app = CRM.new('deb')
+# a_crm_app = CRM.new('Deb')
 # Contact.create('Deb', 'Rosenfeld', 'drosenfeld87@gmail.com', 'likes_cats',)
-# a_crm_app.modify_existing_contact
-puts a_crm_app.add_new_contact
+# # a_crm_app.modify_existing_contact(first_name, last_name, email, notes)
+# puts a_crm_app.print_main_menu
+
+CRM.run
