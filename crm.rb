@@ -35,61 +35,63 @@ class CRM
     end
   end
 
-  def search_by_attribute
-    puts "which attribute would you like"
-    value = gets.chomp.to_s
-    return Contact.search_by_attribute(value)
-  end
+    def add_new_contact
+      print 'Enter First Name: '
+    first_name = gets.chomp
 
-  def add_new_contact
-    print 'Enter First Name: '
-  first_name = gets.chomp
+    print 'Enter Last Name: '
+    last_name = gets.chomp
 
-  print 'Enter Last Name: '
-  last_name = gets.chomp
+    print 'Enter Email Address: '
+    email = gets.chomp
 
-  print 'Enter Email Address: '
-  email = gets.chomp
+    print 'Enter a Note: '
+    note = gets.chomp
 
-  print 'Enter a Note: '
-  note = gets.chomp
-
-  # Contact.create(first_name, last_name, email, note)
-  contact = Contact.create(
-  first_name: first_name,
-  last_name:  last_name,
-  email:      email,
-  note:       note
-)
-  end
+    contact = Contact.create(
+    first_name: first_name,
+    last_name:  last_name,
+    email:      email,
+    note:       note
+  )
+    end
 
   def modify_existing_contact
     contact = search_by_attribute
     puts contact
-    puts 'what do you want to change'
+    puts 'what attribute do you want to change'
     attribute_to_change = gets.chomp
     puts 'what do you want to change it to?'
     new_value = gets.chomp
-    Contact.update(contact, attribute_to_change, new_value)
+    contact.update(attribute_to_change => new_value)
   end
+
+  def search_by_attribute
+    puts "which attribute would you like"
+    attribute = gets.chomp
+    puts "what value does it have?"
+    value = gets.chomp
+    return Contact.find_by(attribute => value)
+  end
+
 
   def delete_contact
     puts "who do you want to delete"
     name = gets.chomp.to_s
-    contact = Contact.search_by('first_name', name)
+    contact = Contact.name('first_name', name)
     puts "Do you really want to delete #{contact.first_name}? (y/n)"
     answer = gets.chomp.to_s
     if answer == 'y'
       Contact.delete(contact)
     else
       puts "good"
+      end
     end
   end
 
   def display_all_contacts
     Contact.all.each do |contact|
       puts "#{contact.first_name}, #{contact.last_name}, #{contact.email}, #{contact.note}"
-    end
   end
 end
 
