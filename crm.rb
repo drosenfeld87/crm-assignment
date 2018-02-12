@@ -58,27 +58,13 @@ class CRM
   end
 
   def modify_existing_contact
-    #find contact to modify
     contact = search_by_attribute
     puts contact
-    #ask for attribute to modify and new value
     puts 'what do you want to change'
     attribute_to_change = gets.chomp
     puts 'what do you want to change it to?'
     new_value = gets.chomp
-    #update attribute on contact
     Contact.update(contact, attribute_to_change, new_value)
-    # print 'Edit First Name: '
-    # first_name = gets.chomp
-    #
-    # print 'Edit Last Name: '
-    # last_name = gets.chomp
-    #
-    # print 'Edit Email Address: '
-    # email = gets.chomp
-    #
-    # print 'Edit a Note: '
-    # note = gets.chomp
   end
 
   def delete_contact
@@ -99,12 +85,10 @@ class CRM
       puts "#{contact.first_name}, #{contact.last_name}, #{contact.email}, #{contact.note}"
     end
   end
-
 end
 
-# a_crm_app = CRM.new('Deb')
-# Contact.create('Deb', 'Rosenfeld', 'drosenfeld87@gmail.com', 'likes_cats',)
-# # a_crm_app.modify_existing_contact(first_name, last_name, email, notes)
-# puts a_crm_app.print_main_menu
+at_exit do
+  ActiveRecord::Base.connection.close
+end
 
 CRM.run
